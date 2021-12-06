@@ -1,0 +1,84 @@
+html{
+    font-family: 'Lato', sans-serif;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1em 4em 1em 4em;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+figure{
+    display: flex;
+    justify-content: center;
+}
+
+.search_bar{
+    display: flex;
+    background-color: #E7E7E7;
+    border-radius: 5px;
+    padding-left: 1em;
+}
+
+.input_search{
+    height: 2em;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    font-size: 1em;
+    padding: 0.5em;
+}
+.input_search:focus{
+    outline: none;
+}
+
+.search_icon{
+    margin-right: 1em;
+}
+
+.advanced_search{
+    margin-top: 2em;
+}
+
+.ingredients_btn{
+    background: url("../img/drop-down-arrow.svg") no-repeat 95% 50% #3282F7;
+}
+
+.apparatus_btn{
+    background: url("../img/drop-down-arrow.svg") no-repeat 95% 50% #68D9A4;
+}
+
+.utensils_btn{
+    background: url("../img/drop-down-arrow.svg") no-repeat 95% 50% #ED6454;
+}
+
+.find_btn::placeholder {
+    color: white;
+  
+}
+
+.find_btn{
+    border:none;
+    border-radius: 5px;
+    height: 69px;
+    width: 170px;
+    font-weight: 700;
+    color: white;
+    font-size: 18px;
+    margin-right: 1.5em;
+}
+
+.find_btn:focus{
+    outline: none;
+}
+
+.find_btn::after{
+    content: "ffffff";
+}
