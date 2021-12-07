@@ -52,15 +52,16 @@ figure{
 }
 
 .ingredients_btn{
-    background: url("../img/drop-down-arrow.svg") no-repeat 95% 50% #3282F7;
+    background-color:  #3282F7;
+    
 }
 
 .apparatus_btn{
-    background: url("../img/drop-down-arrow.svg") no-repeat 95% 50% #68D9A4;
+    background-color: #68D9A4;
 }
 
 .utensils_btn{
-    background: url("../img/drop-down-arrow.svg") no-repeat 95% 50% #ED6454;
+    background-color: #ED6454;
 }
 
 .find_btn::placeholder {
@@ -84,10 +85,73 @@ figure{
     outline: none;
 }
 
-.find_btn::after{
-    content: "ffffff";
-}
-
 .card{
     height: 100%;
+}
+
+.card-row{
+    margin-bottom: 22px;
+}
+
+.card-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: transparent;
+}
+
+.card-time{
+    white-space: nowrap;
+    align-items: center;
+    display: flex;
+
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+.img_clock {
+    margin-right: 5px;
+}
+
+.right{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 8; /* number of lines to show */
+    line-clamp: 8; 
+    -webkit-box-orient: vertical;
+    font-size: 13px;
+
+}
+
+ul {
+    list-style:none;
+}
+
+li{
+    font-size: 13px;
+}
+
+.img_drop_down{ 
+    top: 44%;
+    right: 18%;
+}
+
+#drop_down_1, #drop_down_2, #drop_down_3{
+    position: absolute;
+    display: none;
+}
+
+#drop_down_1{
+    background-color: #3282F7;
+} 
+
+#drop_down_2{
+    background-color: #3282F7;
+}
+
+#drop_down_3{
+    background-color: #3282F7;
 }
