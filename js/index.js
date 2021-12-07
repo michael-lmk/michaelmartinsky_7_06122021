@@ -74,19 +74,21 @@ function buildCard () {
     mainContent.innerHTML = html;
 }
 
+function buildDropDown () {
+    
+}
+
 
 for (let index = 0; index < input_drop_downs.length; index++) {
     const element = input_drop_downs[index];
 
     element.addEventListener("focus", (e) => {
+
         var test = `drop_down_${index+1}`;
         
         document.getElementById(test).style.display = "block";
+       
     })
-}
-
-for (let index = 0; index < input_drop_downs.length; index++) {
-    const element = input_drop_downs[index];
 
     element.addEventListener("blur", (e) => {
         var test = `drop_down_${index+1}`;
@@ -94,6 +96,7 @@ for (let index = 0; index < input_drop_downs.length; index++) {
         document.getElementById(test).style.display = "none";
     })
 }
+
 
 
 buildCard();
