@@ -1,4 +1,4 @@
-import { recipes } from "./recipes.js";
+import { recipes } from "./data/recipes.js";
 
 const mainContent = document.getElementById("main");
 const input_drop_downs = document.getElementsByClassName("find_btn");
