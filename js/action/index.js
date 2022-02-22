@@ -1,47 +1,62 @@
-const input_drop_downs = document.getElementsByClassName("find_btn");
+import App from "../App.js";
 
-function buildDropDown() { }
+const app = new App();
 
-const changeStateDropDown = (index,e) => {
-  
-    var dropDown = document.getElementById(`drop_down_${index + 1}`);
-    var imgDropDown = `img_drop_down_${index + 1}`;
-   
-    var findDivContainer = document.getElementsByClassName(`find_div_container_${index + 1}`)[0];
+app.index()
+app.show_ingredients();
+app.show_appliance();
+app.show_ustensils();
 
-    if (findDivContainer.contains(e.target)) {
+app.appendEventItemDropDown();
 
-      dropDown.style.display = "block";
-      document.getElementsByClassName(imgDropDown)[0].style.transform = "rotate(180deg)";
-      var dropDownWidth = dropDown.clientWidth ;
-      findDivContainer.style.flex = "1";
 
-    } else {
 
-      dropDown.style.display = "none";
-      document.getElementsByClassName(imgDropDown)[0].style.transform = "rotate(0deg)";
-      findDivContainer.style.flex = "0";
-
-    }
-
+const searchInputs = document.getElementsByClassName("find_btn");
+for (let index = 0; index < searchInputs.length; index++) {
+  const searchInput = searchInputs[index];
+  searchInput.addEventListener("input", (e) => {
+    app.search(e);
+  });
 }
 
-for (let index = 0; index < input_drop_downs.length; index++) {
-  window.addEventListener("click", (e) => changeStateDropDown(index,e))
+
+const closeDropDown = () => {
+  var activeDropDown = document.getElementsByClassName("active")[0];
+  if (activeDropDown) {
+    var arrowImg = activeDropDown.getElementsByClassName(`img_drop_down`)[0];
+    var dropDown = activeDropDown.getElementsByClassName("drop_down")[0];
+
+    activeDropDown.classList.remove("active");
+    activeDropDown.style.flex = "0";
+    dropDown.style.display = "none";
+    arrowImg.style.transform = "rotate(0deg)";
+    
+  }
 }
 
-var listAutocomplete = document.getElementsByClassName("ingredient")
-for (let index = 0; index < listAutocomplete.length; index++) {
-  var li = listAutocomplete[index];
 
-  li.addEventListener("click", function (e) {
-    var selected = e.target.innerText;
-    var inputValue = document.getElementById("input_search_ingre");
-    var arrayInputValue = inputValue.value.split(",");
-    
-    arrayInputValue[arrayInputValue.length-1] = selected;
-    
-    inputValue.value = arrayInputValue.join(",")+","; 
+// Ouvre l'autocompletion qui vient d'etre clicker
+const openDropDown = (e) => {
+  app.selectedInput = e.target.getAttribute("data-id");
+  console.log(app.selectedInput);
+  closeDropDown();
 
-  })  
+  var parentElement = e.target.parentElement;
+  var arrowImg = document.getElementsByClassName(`img_drop_down`)[0];
+  var dropDown = parentElement.getElementsByClassName("drop_down")[0];
+  parentElement.classList.add("active")
+  parentElement.style.flex = "1";
+  dropDown.style.display = "block";
+  arrowImg.style.transform = "rotate(180deg)";
+
 };
+
+
+window.addEventListener("click", async (e) => {
+
+  if(e.target.classList.contains("find_btn")){
+    openDropDown(e);
+  } else if(!(e.target.classList.contains("item_drop_down")) ) {
+    closeDropDown();
+  }
+});

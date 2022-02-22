@@ -1,24 +1,19 @@
-
-
-
 class Recipe {
-    
-    constructor(data) {
-        this.id = data.id;
-        this.name = data.name;
-        this.servings = data.servings;
-        this.ingredients = data.ingredients;
-        this.time = data.time,
-        this.description = data.description
-        this.appliance = data.appliance;
-        this.ustensils = data.ustensils;
-        
-    }
+  constructor(data) {
+    this.id = data.id;
+    this.name = data.name;
+    this.servings = data.servings;
+    this.ingredients = data.ingredients;
+    this.time = data.time, 
+    this.description = data.description;
+    this.appliance = data.appliance;
+    this.ustensils = data.ustensils;
+  }
 
-    async buildCard () {            
-        const element = document.createElement("div");
-        element.setAttribute("class","col")
-        element.innerHTML = `
+  buildCard() {
+    const element = document.createElement("div");
+    element.setAttribute("class", "col");
+    element.innerHTML = `
                     <div class="card">
                         <img src="./img/card-img.svg" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -38,9 +33,15 @@ class Recipe {
                     </div>
                 `;
 
-        this.ingredients.forEach(ingredient => { 
-            element.getElementsByClassName("card-text")[0].innerHTML += `<li><b>${ingredient.ingredient}</b>: ${ingredient.quantity? ingredient.quantity: ""} ${ingredient.unit? ingredient.unit: ""}</li>`;
-        });
-        return element;
-    }
+    this.ingredients.forEach((ingredient) => {
+      element.getElementsByClassName("card-text")[0].innerHTML += `<li><b>${
+        ingredient.ingredient
+      }</b>: ${ingredient.quantity ? ingredient.quantity : ""} ${
+        ingredient.unit ? ingredient.unit : ""
+      }</li>`;
+    });
+    return element;
+  }
 }
+
+export default Recipe;

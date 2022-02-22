@@ -26,26 +26,41 @@
 
         </div>
 
+        <div id="tags" class="d-inline-flex">
+
+        </div>
+
         <div class="d-flex advanced_search">
-            <div class="position-relative find_div_container_1">
-                <input id="input_search_ingre" placeholder="Ingrédients" class="ingredients_btn find_btn" value=""></input>
-                <img class="position-absolute img_drop_down_1" src="./img/drop-down-arrow.svg">
-                <div id="drop_down_1">
-                  <ol id="data_list_ingre" class="data_list_ingre">
-                    
-                  </ol>
-                </div>
-              </div>
-            <div class="position-relative find_div_container_2">
-                <input placeholder="Appareils" class="apparatus_btn find_btn" value=""></input>
-                <img class="position-absolute img_drop_down_2" src="./img/drop-down-arrow.svg">
-                <div id="drop_down_2">ff</div>
+          <div class="position-relative find_div_container_1 find_div_container" >
+            <input data-id="1" id="input_search" placeholder="Ingrédients" class="ingredients_btn find_btn input_search_1" value=""></input>
+            <img class="img_drop_down_1 img_drop_down" src="./img/drop-down-arrow.svg">
+            <div id="drop_down_1" class="drop_down">
+              <p class="not_found">Aucun ingrédients trouvés...</p>
+              <ol id="data_list_ingre" class="data_list_ingre">
+                
+              </ol>
             </div>
-            <div class="position-relative find_div_container_3">
-                <input placeholder="Ustensiles" class="utensils_btn find_btn" value=""></input>
-                <img class="position-absolute img_drop_down_3" src="./img/drop-down-arrow.svg">
-                <div id="drop_down_3">ff</div>
+          </div>
+          <div class="position-relative find_div_container_2 find_div_container" >
+            <input data-id="2" id="input_search" placeholder="Appareils" class="apparatus_btn find_btn input_search_2" value=""></input>
+            <img class="img_drop_down_2 img_drop_down" src="./img/drop-down-arrow.svg">
+            <div id="drop_down_2" class="drop_down" >
+              <p class="not_found">Aucun appareils trouvés...</p>
+              <ol id="data_list_app" class="data_list_app">
+                
+              </ol>
             </div>
+          </div>
+          <div class="position-relative find_div_container_3 find_div_container" >
+            <input data-id="3" id="input_search" placeholder="Ustensiles" class="utensils_btn find_btn input_search_3" value=""></input>
+            <img class="img_drop_down_3 img_drop_down" src="./img/drop-down-arrow.svg">
+            <div id="drop_down_3" class="drop_down">
+              <p class="not_found">Aucun ustensiles trouvés...</p>
+              <ol id="data_list_utens" class="data_list_utens">
+                
+              </ol>
+            </div>
+          </div>
         </div>
     </header>
     <main id="main">
@@ -58,14 +73,14 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous">
 </script>
-
-<script src="./js/templates/Recipe.js"></script>  
+<script type="module" src="./js/action/index.js"></script>
+<script type="module" src="./js/templates/Recipe.js"></script>  
 
 <script type="module" src="./js/App.js"></script>
 
 <script type="module" src="./js/data/recipes.js"></script>  
 
-<script type="module" src="./js/action/index.js"></script>
+
 
 
 
