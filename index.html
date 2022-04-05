@@ -2,87 +2,71 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les petits plats</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Les petits plats</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./css/index.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-    <header>
-        <figure>
-            <img src="./img/logo.svg">
-        </figure>
-        <div class="search_bar">
-            <input id="general_input" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" class="input_search"
-                type="search" value="">
-            <img class="search_icon" src="./img/search-icon.svg">
+  <header>
+    <figure>
+      <img src="./img/logo.svg" alt="Logo les petits plats" />
+    </figure>
+    <div class="search_bar">
+      <input id="general_input" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
+        class="input_search" type="search" value="" />
+      <img class="search_icon" src="./img/search-icon.svg" alt="Icone de recherche" />
+    </div>
 
+    <div id="tags" class="d-inline-flex"></div>
+
+    <div class="d-flex advanced_search">
+      <div class="position-relative find_div_container_1 find_div_container">
+        <input data-id="1" placeholder="Ingrédients" class="ingredients_btn find_btn input_search_1" value="" />
+        <img class="img_drop_down_1 img_drop_down" src="./img/drop-down-arrow.svg" alt="Icone du bouton déroulant" />
+        <div id="drop_down_1" class="drop_down">
+          <p class="not_found">Aucun ingrédients trouvés...</p>
+          <ol id="data_list_ingre" class="data_list_ingre"></ol>
         </div>
-
-        <div id="tags" class="d-inline-flex">
-
+      </div>
+      <div class="position-relative find_div_container_2 find_div_container">
+        <input data-id="2" placeholder="Appareils" class="apparatus_btn find_btn input_search_2" value="" />
+        <img class="img_drop_down_2 img_drop_down" src="./img/drop-down-arrow.svg" alt="Icone du bouton déroulant" />
+        <div id="drop_down_2" class="drop_down">
+          <p class="not_found">Aucun appareils trouvés...</p>
+          <ol id="data_list_app" class="data_list_app"></ol>
         </div>
-
-        <div class="d-flex advanced_search">
-          <div class="position-relative find_div_container_1 find_div_container" >
-            <input data-id="1" id="input_search" placeholder="Ingrédients" class="ingredients_btn find_btn input_search_1" value=""></input>
-            <img class="img_drop_down_1 img_drop_down" src="./img/drop-down-arrow.svg">
-            <div id="drop_down_1" class="drop_down">
-              <p class="not_found">Aucun ingrédients trouvés...</p>
-              <ol id="data_list_ingre" class="data_list_ingre">
-                
-              </ol>
-            </div>
-          </div>
-          <div class="position-relative find_div_container_2 find_div_container" >
-            <input data-id="2" id="input_search" placeholder="Appareils" class="apparatus_btn find_btn input_search_2" value=""></input>
-            <img class="img_drop_down_2 img_drop_down" src="./img/drop-down-arrow.svg">
-            <div id="drop_down_2" class="drop_down" >
-              <p class="not_found">Aucun appareils trouvés...</p>
-              <ol id="data_list_app" class="data_list_app">
-                
-              </ol>
-            </div>
-          </div>
-          <div class="position-relative find_div_container_3 find_div_container" >
-            <input data-id="3" id="input_search" placeholder="Ustensiles" class="utensils_btn find_btn input_search_3" value=""></input>
-            <img class="img_drop_down_3 img_drop_down" src="./img/drop-down-arrow.svg">
-            <div id="drop_down_3" class="drop_down">
-              <p class="not_found">Aucun ustensiles trouvés...</p>
-              <ol id="data_list_utens" class="data_list_utens">
-                
-              </ol>
-            </div>
-          </div>
+      </div>
+      <div class="position-relative find_div_container_3 find_div_container">
+        <input data-id="3" placeholder="Ustensiles" class="utensils_btn find_btn input_search_3" value="" />
+        <img class="img_drop_down_3 img_drop_down" src="./img/drop-down-arrow.svg" alt="Icone du bouton déroulant" />
+        <div id="drop_down_3" class="drop_down">
+          <p class="not_found">Aucun ustensiles trouvés...</p>
+          <ol id="data_list_utens" class="data_list_utens"></ol>
         </div>
-    </header>
-    <main id="main">
-       
-    </main>
+      </div>
+    </div>
+  </header>
+  <main id="main"></main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script type="module" src="./js/action/index.js"></script>
+
+  <script type="module" src="./js/templates/Recipe.js"></script>
+
+  <script type="module" src="./js/App.js"></script>
+
+  <script type="module" src="./js/data/recipes.js"></script>
 
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous">
-</script>
-<script type="module" src="./js/action/index.js"></script>
-
-<script type="module" src="./js/templates/Recipe.js"></script>  
-
-<script type="module" src="./js/App.js"></script>
-
-<script type="module" src="./js/data/recipes.js"></script>  
-
-
-
-
 
 </html>
