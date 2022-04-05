@@ -87,7 +87,7 @@ class Recipe {
   /**
    * Recupere les noms d'ingredients de la recette 
    */
-   getIngredientName() {
+   getIngredientNameToLowerCase() {
     let ingredientsNames = [];
     
     for (let index = 0; index < this.ingredients.length; index++) {
@@ -96,6 +96,20 @@ class Recipe {
     }
 
     return ingredientsNames;
+  }
+  
+  /**
+   * Recupere les noms d'ustensils de la recette en lower case 
+   */
+   getUstensilsNameToLowerCase() {
+    let ustensilsNames = [];
+    
+    for (let index = 0; index < this.ustensils.length; index++) {
+      const ustensils = this.ustensils[index];
+      ustensilsNames.push(ustensils.toLowerCase());
+    }
+
+    return ustensilsNames;
   }
 }
 

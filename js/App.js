@@ -29,21 +29,25 @@ class App {
    * Controller de la recherche
    */
   controllerSearch() {
-    let general_input = document.getElementById("general_input").value;
+    this.currentRecipes = recipes;
+    let general_input = document.getElementById("general_input").value.toLowerCase();
+    
     if (general_input.length >= 3) {
-      this.currentRecipes = [];
-      this.searchRecipe();
+      
+      this.currentRecipes = this.searchRecipe(recipes,general_input);
+     
     }
 
     let tags = document.getElementsByClassName("tag"); 
     if (tags.length > 0) {
-      this.searchWithTags();
+      this.currentRecipes = this.searchWithTags(this.currentRecipes);
     }
-    console.log(tags.length === 0 && general_input.length < 3,tags.length);
+    
     if (tags.length === 0 && general_input.length < 3) {
       this.index()
     }
-    
+
+    Recipe.renderCardContainer(this);
   }
 
   /**
@@ -77,111 +81,121 @@ class App {
   }
 
   /**
-   * Recherche general sur la description le titre et les ingredients d'un recherche
+   * Recherche general sur la description le titre et les ingredients d'une recherche
    */
-  searchRecipe() {
-    var general_input = document.getElementById("general_input");
-    var inputValue = general_input.value.toLowerCase();
-
+  searchRecipe(listRecipes, searchString) {
+    let listResultRecipes = [];
+    
     document.getElementById("main").innerHTML = "";
 
     // Je boucle sur chaque recette
-    for (let indexRecipe = 0; indexRecipe < recipes.length; indexRecipe++) {
-      var recipe = new Recipe(recipes[indexRecipe]);
+    for (let indexRecipe = 0; indexRecipe < listRecipes.length; indexRecipe++) {
+      var recipe = new Recipe(listRecipes[indexRecipe]);
       var isIncluded = false;
-
+     
       // Verification dans la description
-      isIncluded = recipe.description.toLowerCase().includes(inputValue);
+      isIncluded = recipe.description.toLowerCase().includes(searchString);
 
       if (!isIncluded) {
         // Verification dans le name de la recette
-        isIncluded = recipe.name.toLowerCase().includes(inputValue);
+        isIncluded = recipe.name.toLowerCase().includes(searchString);
       }
 
       if (!isIncluded) {
         // Verification dans les ingredients
-        for (const key in recipe.ingredient) {
-          const element = recipe.ingredient[key];
+        for (const key in recipe.ingredients) {
+          const element = recipe.ingredients[key];
 
-          isIncluded = element.ingredient.toLowerCase().includes(inputValue);
+          isIncluded = element.ingredient.toLowerCase().includes(searchString);
+          break;
         }
       }
 
       // Ajout de la recette dans un tableau
       if (isIncluded) {
-        this.currentRecipes.push(recipe);
+        listResultRecipes.push(recipe);
       }
     }
-
-    Recipe.renderCardContainer(this);
+   
+    return listResultRecipes;
+    // Recipe.renderCardContainer(this);
   }
 
   /**
    * Filtre les recettes en fonction des tags
    */ 
-  searchWithTags() {
+  searchWithTags(listRecipes) {
     const tags_ingre = document.getElementsByClassName("tag_input_1");
     const tags_appli = document.getElementsByClassName("tag_input_2");
     const tags_usten = document.getElementsByClassName("tag_input_3");
 
+    let listResultRecipes = [];
+   
     // Boucle sur les recettes affiché actuellement
-    for (let index = 0; index < this.currentRecipes.length; index++) {
-      const recipe = this.currentRecipes[index];
-      const ingredientsArray = recipe.getIngredientName();
-      var isIncluded = false;
+    for (let index = 0; index < listRecipes.length; index++) {
+      const recipe = new Recipe(listRecipes[index]);
+      const ingredientsArray = recipe.getIngredientNameToLowerCase();
+      const ustensilsArrayLowerCase = recipe.getUstensilsNameToLowerCase();
+      var isIncluded = true;
       
-      if (tags_ingre.length > 0 && this.searchByIngredients(tags_ingre,ingredientsArray)) {
-        isIncluded = true;
+      if (tags_ingre.length > 0 && !this.searchByIngredients(tags_ingre,ingredientsArray)) {
+        isIncluded = false;
       }
-
-      if (tags_appli.length > 0 && this.searchByAppliances(tags_appli,recipe)) {
-        isIncluded = true;
+      
+      if (tags_appli.length > 0 && !this.searchByAppliances(tags_appli,recipe.appliance)) {
+        isIncluded = false;
       }
-
-      if (tags_usten.length > 0 && this.searchByUstensils(tags_usten,recipe)) {
-        isIncluded = true;
+      
+      if (tags_usten.length > 0 && !this.searchByUstensils(tags_usten,ustensilsArrayLowerCase)) {
+        isIncluded = false;
       }
 
       // Ajout de la recette dans un tableau
-      if (!isIncluded){ 
-        this.currentRecipes.splice(index, 1);
+      if (isIncluded){ 
+        listResultRecipes.push(recipe);
       }
     }
+    // console.log(listResultRecipes);
+    return listResultRecipes;
     
-    Recipe.renderCardContainer(this);
   }
 
   searchByIngredients(tags_ingre,ingredientsArray) {
     // Boucle sur les tags d'ingredients
+    var recipeIsIncludedByIngredient = true;  
     for (let i_ingre = 0; i_ingre < tags_ingre.length; i_ingre++) {
       const tag_ingre = tags_ingre[i_ingre].innerText.toLowerCase();
 
-      if (ingredientsArray.includes(tag_ingre)) {
-        return true;
+      if (!ingredientsArray.includes(tag_ingre)) {
+        recipeIsIncludedByIngredient = false ;
       }
     }
+    return recipeIsIncludedByIngredient;
   }
 
-  searchByAppliances(tags_appli,recipe) {
+  searchByAppliances(tags_appli,appliance) {
+    
     //Boucle pour vérifier les appareils
     for (let i_appli = 0; i_appli < tags_appli.length; i_appli++) {
       const tag_appli = tags_appli[i_appli].innerText.toLowerCase();
-
-      if (recipe.appliance.toLowerCase().includes(tag_appli)) {
+     
+      if (appliance.toLowerCase() === tag_appli) {
         return true;
-      }
+      } 
     }
   }
 
-  searchByUstensils(tags_usten,recipe) {
+  searchByUstensils(tags_usten,ustensilsArray) {
+    var recipeIsIncludedByustensils = true;
     //Boucle pour vérifier les ustensils
     for (let i_usten = 0; i_usten < tags_usten.length; i_usten++) {
       const tag_usten = tags_usten[i_usten].innerText.toLowerCase();
 
-      if (recipe.ustensils.includes(tag_usten)) {
-        return true;
+      if (!ustensilsArray.includes(tag_usten)) {
+        recipeIsIncludedByustensils = false;
       }
     }
+    return recipeIsIncludedByustensils;
   }
 
   // Ajoute l'evenement sur l'autocompletion
