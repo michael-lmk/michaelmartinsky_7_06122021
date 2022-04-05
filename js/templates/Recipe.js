@@ -51,6 +51,10 @@ class Recipe {
     
   }
 
+  /**
+   * Construit un element HTML d'une recette 
+   * @returns Return un element HTML d'une recette 
+   */
   buildCard() {
     const element = document.createElement("div");
     element.setAttribute("class", "col");

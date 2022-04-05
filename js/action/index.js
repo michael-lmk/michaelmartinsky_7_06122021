@@ -61,9 +61,3 @@ const openDropDown = (e) => {
   arrowImg.style.transform = "rotate(180deg)";
 
 };
-
-
-
-
-
-// export default {searchWithTags};

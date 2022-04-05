@@ -52,6 +52,7 @@ class App {
 
   /**
    * Fonction de suggestion pour les utilisateurs sur les dropdown
+   * @param {Event} event Parametre Event du EventListener
    */
   searchInDropDown(event) {
     var parentElement = event.target.parentElement;
@@ -80,9 +81,12 @@ class App {
     domNot_found[0].style.display = nbIngredients <= 0 ? "block" : "none";
   }
 
-  /**
-   * Recherche general sur la description le titre et les ingredients d'une recherche
-   */
+ /**
+  * Recherche general sur la description le titre et les ingredients d'une recherche
+  * @param {Array} listRecipes 
+  * @param {String} searchString 
+  * @returns Tableaux de recette trié par l'input générale de recherche 
+  */
   searchRecipe(listRecipes, searchString) {
     let listResultRecipes = [];
     
@@ -123,6 +127,8 @@ class App {
 
   /**
    * Filtre les recettes en fonction des tags
+   * @param {Array} listRecipes Liste des recette que l'on souhaite tri par tag  
+   * @returns Tableaux de recette trié par les tags 
    */ 
   searchWithTags(listRecipes) {
     const tags_ingre = document.getElementsByClassName("tag_input_1");
@@ -160,6 +166,12 @@ class App {
     
   }
 
+  /**
+   * 
+   * @param {Array} tags_ingre tags d'ingredients selectionner par l'utilisateur
+   * @param {Array} ingredientsArray tableaux d'ingrédients d'une recette peut etre recuperer par recipe.getIngredientNameToLowerCase();
+   * @returns 
+   */
   searchByIngredients(tags_ingre,ingredientsArray) {
     // Boucle sur les tags d'ingredients
     var recipeIsIncludedByIngredient = true;  
@@ -173,6 +185,12 @@ class App {
     return recipeIsIncludedByIngredient;
   }
 
+  /**
+   * 
+   * @param {Array} tags_appli tags d'appareils selectionner par l'utilisateur
+   * @param {String} appliance appareil recuperer dans la recette
+   * @returns 
+   */
   searchByAppliances(tags_appli,appliance) {
     
     //Boucle pour vérifier les appareils
@@ -185,6 +203,12 @@ class App {
     }
   }
 
+  /**
+   * 
+   * @param {Array} tags_usten tags d'ustensils selectionner par l'utilisateur
+   * @param {Array} ustensilsArray ustensils recuperer dans la recette
+   * @returns 
+   */
   searchByUstensils(tags_usten,ustensilsArray) {
     var recipeIsIncludedByustensils = true;
     //Boucle pour vérifier les ustensils
@@ -198,7 +222,9 @@ class App {
     return recipeIsIncludedByustensils;
   }
 
-  // Ajoute l'evenement sur l'autocompletion
+  /**
+   * Ajoute l'evenement sur l'autocompletion
+   */ 
   appendEventItemDropDown() {
     var listAutocomplete = document.getElementsByClassName("item_drop_down");
 
@@ -230,7 +256,9 @@ class App {
     }
   }
 
-  // Créer la liste dans le drop down des ingredients
+  /**
+   * Créer la liste dans le drop down des ingredients
+   */ 
   show_ingredients() {
     const domParent = document.getElementById("data_list_ingre");
     domParent.innerHTML = "";
@@ -260,7 +288,9 @@ class App {
     }
   }
 
-  // Créer la liste dans le drop down des appareils
+  /**
+   * Créer la liste dans le drop down des appareils
+   */ 
   show_appliance() {
     const domParent = document.getElementById("data_list_app");
     domParent.innerHTML = "";
@@ -281,7 +311,9 @@ class App {
     }
   }
 
-  // Créer la liste dans le dropdown des ustensils
+  /**
+   * Créer la liste dans le dropdown des ustensils
+   */ 
   show_ustensils() {
     const domParent = document.getElementById("data_list_utens");
     domParent.innerHTML = "";
