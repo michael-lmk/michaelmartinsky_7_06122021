@@ -63,7 +63,7 @@ figure {
 .find_div_container_1,
 .find_div_container_2,
 .find_div_container_3 {
-  margin-right: 15px;
+  margin: 0 0 10px 15px;
   min-width: fit-content;
   border-radius: 5px;
   flex-direction: row;
@@ -239,4 +239,24 @@ button {
 
 .tag_input_3 {
   background-color: #ed6454;
+}
+
+.advanced_search {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1173px) { 
+  .advanced_search {
+    justify-content: center;
+  }
+  
+}
+
+@media (max-width: 400px) { 
+  body {
+    margin: 10px;
+  }
+  .find_div_container{
+    margin: 0 0 10px 0 ;
+  }
 }

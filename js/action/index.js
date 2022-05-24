@@ -4,7 +4,9 @@ const app = new App();
 
 app.index();
 
-// Ajoute l'évenement qui ouvre ou ferme l'autocomplétion
+/**
+ *  Ajoute l'évenement qui ouvre ou ferme l'autocomplétion
+ */
 window.addEventListener("click", async (e) => {
 
   if(e.target.classList.contains("find_btn")){
@@ -14,7 +16,9 @@ window.addEventListener("click", async (e) => {
   }
 });
 
-// Ajoute l'évenement de recherche sur l'input editer 
+/**
+ *  Ajoute l'évenement de recherche sur l'input editer 
+ */ 
 const searchInputs = document.getElementsByClassName("find_btn");
 for (let index = 0; index < searchInputs.length; index++) {
   const searchInput = searchInputs[index];
@@ -23,7 +27,9 @@ for (let index = 0; index < searchInputs.length; index++) {
   });
 }
 
-// Ajoute l'évenement de recherche sur l'input général 
+/**
+ *  Ajoute l'évenement de recherche sur l'input général 
+ */ 
 const general_input = document.getElementById("general_input");
 general_input.addEventListener("input", (e) => {
   
@@ -31,7 +37,9 @@ general_input.addEventListener("input", (e) => {
   
 });
 
-// Modifie le style de l'autocompletion pour le faire disparaitre
+/**
+ *  Modifie le style de l'autocompletion pour le faire disparaitre
+ */ 
 const closeDropDown = () => {
   var activeDropDown = document.getElementsByClassName("active")[0];
   if (activeDropDown) {
@@ -46,7 +54,9 @@ const closeDropDown = () => {
   }
 }
 
-// Modifie le style de l'autocompletion qui vient d'etre clicker pour l'afficher
+/**
+ *  Modifie le style de l'autocompletion qui vient d'etre clicker pour l'afficher
+ */
 const openDropDown = (e) => {
   app.selectedInput = e.target.getAttribute("data-id");
   
