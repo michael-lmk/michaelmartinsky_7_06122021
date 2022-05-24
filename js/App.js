@@ -16,11 +16,7 @@ class App {
     this.currentRecipes = [];
 
     // je récupère les data de mon fichier
-    for (let index = 0; index < recipes.length; index++) {
-      var recipeClass = new Recipe(recipes[index]);
-
-      this.currentRecipes.push(recipeClass);
-    }
+    this.currentRecipes = recipes.map( recipe => new Recipe(recipe)  )
 
     Recipe.renderCardContainer(this);
   }
@@ -29,6 +25,7 @@ class App {
    * Controller de la recherche
    */
   controllerSearch() {
+    document.getElementById("main").innerHTML = "";
     this.currentRecipes = recipes;
     let general_input = document.getElementById("general_input").value.toLowerCase();
     
@@ -47,6 +44,8 @@ class App {
       this.index()
     }
 
+    this.currentRecipes = this.currentRecipes.map(element => new Recipe(element));
+
     Recipe.renderCardContainer(this);
   }
 
@@ -59,20 +58,18 @@ class App {
 
     var input = event.target.value;
 
-    var domItemDropDown =
-      parentElement.getElementsByClassName("item_drop_down");
+    var domItemDropDown = parentElement.getElementsByClassName("item_drop_down");
+
     var domNot_found = parentElement.getElementsByClassName("not_found");
 
     var nbIngredients = 0;
 
     for (var i = 0; i < domItemDropDown.length; i++) {
-      if (
-        !domItemDropDown[i].innerHTML
-          .toLowerCase()
-          .includes(input.toLowerCase())
-      ) {
+      if (!domItemDropDown[i].innerHTML.toLowerCase().includes(input.toLowerCase())) {
         domItemDropDown[i].style.display = "none";
+
       } else {
+
         domItemDropDown[i].style.display = "list-item";
         nbIngredients++;
       }
@@ -88,13 +85,11 @@ class App {
   * @returns Tableaux de recette trié par l'input générale de recherche 
   */
   searchRecipe(listRecipes, searchString) {
-    let listResultRecipes = [];
-    
-    document.getElementById("main").innerHTML = "";
 
     // Je boucle sur chaque recette
-    for (let indexRecipe = 0; indexRecipe < listRecipes.length; indexRecipe++) {
-      var recipe = new Recipe(listRecipes[indexRecipe]);
+    let listResultRecipes = listRecipes.filter((elementRicipe) => {
+
+      var recipe = new Recipe(elementRicipe);
       var isIncluded = false;
      
       // Verification dans la description
@@ -107,22 +102,18 @@ class App {
 
       if (!isIncluded) {
         // Verification dans les ingredients
-        for (const key in recipe.ingredients) {
-          const element = recipe.ingredients[key];
-
-          isIncluded = element.ingredient.toLowerCase().includes(searchString);
-          break;
-        }
+        var returningIngredient = recipe.ingredients.filter((element) => element.ingredient.toLowerCase().includes(searchString) );
+        isIncluded = returningIngredient.length > 0 ? true : false;
       }
 
       // Ajout de la recette dans un tableau
       if (isIncluded) {
-        listResultRecipes.push(recipe);
+        return recipe;
       }
-    }
+    });
    
     return listResultRecipes;
-    // Recipe.renderCardContainer(this);
+    
   }
 
   /**
@@ -161,7 +152,7 @@ class App {
         listResultRecipes.push(recipe);
       }
     }
-    // console.log(listResultRecipes);
+    
     return listResultRecipes;
     
   }
@@ -173,6 +164,7 @@ class App {
    * @returns 
    */
   searchByIngredients(tags_ingre,ingredientsArray) {
+
     // Boucle sur les tags d'ingredients
     var recipeIsIncludedByIngredient = true;  
     for (let i_ingre = 0; i_ingre < tags_ingre.length; i_ingre++) {
